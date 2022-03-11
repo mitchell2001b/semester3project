@@ -1,13 +1,19 @@
 package com.example.demoo.account;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "account")
 public class Account
 {
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String Name;
     private String PassWord;
     private LocalDate DateOfBirth;
+    @Column(unique=true)
     private String Email;
 
 
@@ -27,6 +33,11 @@ public class Account
         this.DateOfBirth = dateOfBirth;
         this.Email = email;
         this.PassWord = passWord;
+    }
+
+    public Account()
+    {
+
     }
 
     public Long getId() {

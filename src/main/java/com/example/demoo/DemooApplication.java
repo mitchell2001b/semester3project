@@ -1,21 +1,25 @@
 package com.example.demoo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
+
 public class DemooApplication {
+
+	@Autowired
+	private static JdbcTemplate jdbcTemplate;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemooApplication.class, args);
+
+
 	}
 
 
 
-	/*@GetMapping
-	public String Hello()
-	{
-		return "bami";
-	}*/
+
 
 }
