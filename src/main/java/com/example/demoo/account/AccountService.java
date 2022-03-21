@@ -32,4 +32,12 @@ public class AccountService
         return users;
 
     }
+
+    public Account AddAccount(Account newAccount)
+    {
+        Dal.AddAccountToDatabase(newAccount);
+        System.out.println(newAccount.getDateOfBirth());
+        System.out.println(newAccount.getEmail());
+        return newAccount;
+    }
 }

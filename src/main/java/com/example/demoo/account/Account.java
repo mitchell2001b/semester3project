@@ -11,8 +11,8 @@ public class Account
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String Name;
-    private String PassWord;
-    private LocalDate DateOfBirth;
+    private String Password;
+    private LocalDate Dateofbirth;
     @Column(unique=true)
     private String Email;
 
@@ -21,18 +21,18 @@ public class Account
     {
         this.Id = id;
         this.Name = name;
-        this.DateOfBirth = dateOfBirth;
+        this.Dateofbirth = dateOfBirth;
         this.Email = email;
-        this.PassWord = passWord;
+        this.Password = passWord;
 
     }
 
     public Account(String name, LocalDate dateOfBirth, String passWord, String email)
     {
         this.Name = name;
-        this.DateOfBirth = dateOfBirth;
+        this.Dateofbirth = dateOfBirth;
         this.Email = email;
-        this.PassWord = passWord;
+        this.Password = passWord;
     }
 
     public Account()
@@ -57,19 +57,19 @@ public class Account
     }
 
     public String getPassWord() {
-        return PassWord;
+        return Password;
     }
 
     public void setPassWord(String passWord) {
-        PassWord = passWord;
+        Password = passWord;
     }
 
     public LocalDate getDateOfBirth() {
-        return DateOfBirth;
+        return Dateofbirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+        Dateofbirth = dateOfBirth;
     }
 
     public String getEmail() {
@@ -85,8 +85,8 @@ public class Account
         return "User{" +
                 "Id=" + Id +
                 ", Name='" + Name + '\'' +
-                ", PassWord='" + PassWord + '\'' +
-                ", DateOfBirth=" + DateOfBirth +
+                ", PassWord='" + Password + '\'' +
+                ", DateOfBirth=" + Dateofbirth +
                 ", Email='" + Email + '\'' +
                 '}';
     }

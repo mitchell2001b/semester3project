@@ -21,4 +21,9 @@ public class AccountDal
     {
         return repo.findAll();
     }
+
+    public void AddAccountToDatabase(Account newAccount)
+    {
+        this.repo.save(newAccount);
+    }
 }
