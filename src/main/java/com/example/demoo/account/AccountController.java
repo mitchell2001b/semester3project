@@ -1,9 +1,11 @@
 package com.example.demoo.account;
 
+import com.example.demoo.dtos.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -20,12 +22,33 @@ public class AccountController
     @GetMapping
     public List<Account> GetAccounts()
     {
+        System.out.println("Howdy3");
         return AccountService.GetAccounts();
     }
 
     @PostMapping(value = "/create")
-    public Account CreateAccount(@RequestBody Account newAccount)
+    public void CreateAccount(@RequestBody Account newAccount)
     {
-        return AccountService.AddAccount(newAccount);
+        System.out.println(newAccount);
+        System.out.println(newAccount.getEmail());
+        AccountService.AddAccount(newAccount);
+    }
+
+    @GetMapping("/{Id}")
+    public Optional<Account> GetAccountById(@PathVariable int Id)
+    {
+        System.out.println(Id + "joo");
+        return AccountService.SelectAccountById(Id);
+    }
+
+    @PutMapping("/{Id}")
+    public void UpdateAccount(@PathVariable("Id") int id, @RequestBody Account account)
+    {
+        AccountService.UpdateAccount(new AccountDto(id, account.getName(), account.getPassword(), account.getDateofbirth(), account.getEmail()));
+    }
+
+    @DeleteMapping("/{Id}")
+    public void DeleteAccount(@PathVariable("Id") int Id) {
+        AccountService.DeleteAccount(Id);
     }
 }
