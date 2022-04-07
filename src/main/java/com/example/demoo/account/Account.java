@@ -1,6 +1,7 @@
 package com.example.demoo.account;
 
 import com.example.demoo.task.Task;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Account
     private LocalDate Dateofbirth;
     @Column(unique=true)
     private String Email;
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
     public Set<Task> tasks = new HashSet<>();
 

@@ -11,25 +11,30 @@ public class Task
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long taskid;
+    private int taskid;
     private String Title;
     private String Discription;
+    private Boolean Completed;
     private LocalDate Createdat;
     @ManyToOne
     @JoinColumn(name = "accountid")
     private Account account;
 
-    public Task(Long id, String title, String discription, LocalDate createdat, Account account) {
-        taskid = id;
+    public Task(int taskid, String title, String discription, Boolean completed, LocalDate createdat, Account account) {
+
+        this.taskid = taskid;
         Title = title;
         Discription = discription;
+        Completed = completed;
         Createdat = createdat;
         this.account = account;
     }
 
-    public Task(String title, String discription, LocalDate createdat, Account account) {
+    public Task(String title, String discription, Boolean completed, LocalDate createdat, Account account) {
+
         Title = title;
         Discription = discription;
+        Completed = completed;
         Createdat = createdat;
         this.account = account;
     }
@@ -39,19 +44,11 @@ public class Task
 
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Long getTaskid() {
+    public int getTaskid() {
         return taskid;
     }
 
-    public void setTaskid(Long taskid) {
+    public void setTaskid(int taskid) {
         this.taskid = taskid;
     }
 
@@ -71,6 +68,14 @@ public class Task
         Discription = discription;
     }
 
+    public Boolean getCompleted() {
+        return Completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        Completed = completed;
+    }
+
     public LocalDate getCreatedat() {
         return Createdat;
     }
@@ -79,12 +84,21 @@ public class Task
         Createdat = createdat;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
                 "taskid=" + taskid +
                 ", Title='" + Title + '\'' +
                 ", Discription='" + Discription + '\'' +
+                ", Completed=" + Completed +
                 ", Createdat=" + Createdat +
                 ", account=" + account +
                 '}';
