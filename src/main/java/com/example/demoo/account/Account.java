@@ -21,7 +21,7 @@ public class Account
     @Column(unique=true)
     private String Email;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", orphanRemoval = true)
     public Set<Task> tasks = new HashSet<>();
 
     public Account(int accountid, String name, String password, LocalDate dateofbirth, String email, Set<Task> tasks) {
