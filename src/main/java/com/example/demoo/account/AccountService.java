@@ -29,6 +29,7 @@ public class AccountService
 
     public void AddAccount(Account newAccount)
     {
+        newAccount.setRole(1);
         this.repo.save(newAccount);
     }
 

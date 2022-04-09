@@ -18,50 +18,43 @@ public class Account
     private String Name;
     private String Password;
     private LocalDate Dateofbirth;
+    private int role;
     @Column(unique=true)
     private String Email;
     @JsonIgnore
     @OneToMany(mappedBy = "account", orphanRemoval = true)
     public Set<Task> tasks = new HashSet<>();
 
-    public Account(int accountid, String name, String password, LocalDate dateofbirth, String email, Set<Task> tasks) {
+    public Account(int accountid, String name, String password, LocalDate dateofbirth, int role, String email, Set<Task> tasks) {
         this.accountid = accountid;
         Name = name;
         Password = password;
         Dateofbirth = dateofbirth;
+        this.role = role;
         Email = email;
         this.tasks = tasks;
     }
 
-    public Account(int id, String name, LocalDate dateOfBirth, String passWord, String email)
-    {
-        this.accountid = id;
-        this.Name = name;
-        this.Dateofbirth = dateOfBirth;
-        this.Email = email;
-        this.Password = passWord;
-
-    }
-
-    public Account(String name, LocalDate dateOfBirth, String passWord, String email)
-    {
-        this.Name = name;
-        this.Dateofbirth = dateOfBirth;
-        this.Email = email;
-        this.Password = passWord;
-    }
-
-    public Account()
-    {
-
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
+    public Account(String name, String password, LocalDate dateofbirth, int role, String email, Set<Task> tasks) {
+        Name = name;
+        Password = password;
+        Dateofbirth = dateofbirth;
+        this.role = role;
+        Email = email;
         this.tasks = tasks;
+    }
+
+    public Account(int accountid, String name, String password, LocalDate dateofbirth, int role, String email) {
+        this.accountid = accountid;
+        Name = name;
+        Password = password;
+        Dateofbirth = dateofbirth;
+        this.role = role;
+        Email = email;
+    }
+
+    public Account(){
+
     }
 
     public int getAccountid() {
@@ -84,16 +77,24 @@ public class Account
         return Password;
     }
 
-    public void setPassword(String passWord) {
-        Password = passWord;
+    public void setPassword(String password) {
+        Password = password;
     }
 
     public LocalDate getDateofbirth() {
         return Dateofbirth;
     }
 
-    public void setDateofbirth(LocalDate dateOfBirth) {
-        Dateofbirth = dateOfBirth;
+    public void setDateofbirth(LocalDate dateofbirth) {
+        Dateofbirth = dateofbirth;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -104,14 +105,24 @@ public class Account
         Email = email;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "Id=" + accountid +
+        return "Account{" +
+                "accountid=" + accountid +
                 ", Name='" + Name + '\'' +
                 ", Password='" + Password + '\'' +
                 ", Dateofbirth=" + Dateofbirth +
+                ", role=" + role +
                 ", Email='" + Email + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 }

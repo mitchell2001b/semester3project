@@ -58,7 +58,7 @@ public class TaskService
         {
             if(dto.getAccount().getAccountid() != 0 && task.getAccount().getAccountid() != dto.getAccount().getAccountid())
             {
-                task.setAccount(new Account(dto.getAccount().getAccountid(), null, null, null, null));
+                task.setAccount(new Account(dto.getAccount().getAccountid(), null, null, null, 0, null));
             }
         }
     }
