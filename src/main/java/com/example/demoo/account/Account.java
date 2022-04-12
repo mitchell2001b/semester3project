@@ -53,6 +53,10 @@ public class Account
         Email = email;
     }
 
+    public Account(int accountid) {
+        this.accountid = accountid;
+    }
+
     public Account(){
 
     }

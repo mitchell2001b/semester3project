@@ -13,7 +13,7 @@ public class Task
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskid;
     private String Title;
-    private String Discription;
+    private String Description;
     private Boolean Completed;
     private LocalDate Createdat;
     @ManyToOne
@@ -24,7 +24,7 @@ public class Task
 
         this.taskid = taskid;
         Title = title;
-        Discription = discription;
+        Description = discription;
         Completed = completed;
         Createdat = createdat;
         this.account = account;
@@ -33,10 +33,19 @@ public class Task
     public Task(String title, String discription, Boolean completed, LocalDate createdat, Account account) {
 
         Title = title;
-        Discription = discription;
+        Description = discription;
         Completed = completed;
         Createdat = createdat;
         this.account = account;
+    }
+
+    public Task(String title, String discription, Boolean completed, LocalDate createdat) {
+
+        Title = title;
+        Description = discription;
+        Completed = completed;
+        Createdat = createdat;
+
     }
 
     public Task()
@@ -60,12 +69,12 @@ public class Task
         Title = title;
     }
 
-    public String getDiscription() {
-        return Discription;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setDiscription(String discription) {
-        Discription = discription;
+    public void setDescription(String discription) {
+        Description = discription;
     }
 
     public Boolean getCompleted() {
@@ -97,7 +106,7 @@ public class Task
         return "Task{" +
                 "taskid=" + taskid +
                 ", Title='" + Title + '\'' +
-                ", Discription='" + Discription + '\'' +
+                ", Discription='" + Description + '\'' +
                 ", Completed=" + Completed +
                 ", Createdat=" + Createdat +
                 ", account=" + account +

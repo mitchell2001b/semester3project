@@ -26,6 +26,12 @@ public class AccountController
         return AccountService.GetAccounts();
     }
 
+    @GetMapping(value = "/employees")
+    public List<Account> GetEmployeeAccounts()
+    {
+        return AccountService.GetEmployeeAccounts();
+    }
+
     @PostMapping(value = "/create")
     public void CreateAccount(@RequestBody Account newAccount)
     {

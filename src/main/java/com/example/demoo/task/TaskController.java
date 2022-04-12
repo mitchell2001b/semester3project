@@ -58,14 +58,19 @@ public class TaskController
         System.out.println(id + "het id is");
         if(task.getAccount() != null)
         {
-            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDiscription(), task.getCompleted(), task.getCreatedat(), new AccountDto(task.getAccount().getAccountid(), null, null, null
+            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), new AccountDto(task.getAccount().getAccountid(), null, null, null
                     ,null)));
         }
         else
         {
-            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDiscription(), task.getCompleted(), task.getCreatedat(), null));
+            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), null));
         }
 
+    }
+
+    @DeleteMapping("/{Id}")
+    public void DeleteTask(@PathVariable("Id") int Id) {
+        TaskService.DeleteTask(Id);
     }
 
 

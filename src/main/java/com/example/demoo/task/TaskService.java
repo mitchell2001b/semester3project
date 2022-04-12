@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,13 +34,18 @@ public class TaskService
 
     public void AddTask(Task newTask)
     {
+        newTask.setCompleted(false);
+        newTask.setCreatedat(LocalDate.now());
+        System.out.println(newTask);
+
         this.repo.save(newTask);
     }
 
     public Optional<Task> SelectTaskById(int id)
     {
-        System.out.println(id + "ppppl");
+        System.out.println(id + "ppppxxxxxl");
         System.out.println(this.repo.existsById(id));
+
         return this.repo.findById(id);
     }
 
@@ -60,6 +66,15 @@ public class TaskService
             {
                 task.setAccount(new Account(dto.getAccount().getAccountid(), null, null, null, 0, null));
             }
+        }
+    }
+
+    public void DeleteTask(int id)
+    {
+        Optional<Task> taskToDelete = repo.findById(id);
+        if(repo.existsById(id))
+        {
+            this.repo.deleteById(id);
         }
     }
 }

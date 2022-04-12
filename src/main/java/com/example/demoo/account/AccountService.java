@@ -27,6 +27,10 @@ public class AccountService
         return repo.findAll();
     }
 
+    public List<Account> GetEmployeeAccounts()
+    {
+        return this.repo.selectAllEmployees();
+    }
     public void AddAccount(Account newAccount)
     {
         newAccount.setRole(1);
