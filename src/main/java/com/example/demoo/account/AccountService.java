@@ -31,10 +31,10 @@ public class AccountService
     {
         return this.repo.selectAllEmployees();
     }
-    public void AddAccount(Account newAccount)
+    public void AddAccount(AccountDto newAccount)
     {
-        newAccount.setRole(1);
-        this.repo.save(newAccount);
+        Account accountToAdd = new Account(newAccount.getName(), newAccount.getPassword(), newAccount.getDateofbirth(), 1, newAccount.getEmail(), null);
+        this.repo.save(accountToAdd);
     }
 
     public Optional<Account> SelectAccountById(int id)

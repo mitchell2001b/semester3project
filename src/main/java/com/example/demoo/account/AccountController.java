@@ -33,7 +33,7 @@ public class AccountController
     }
 
     @PostMapping(value = "/create")
-    public void CreateAccount(@RequestBody Account newAccount)
+    public void CreateAccount(@RequestBody AccountDto newAccount)
     {
         System.out.println(newAccount);
         System.out.println(newAccount.getEmail());

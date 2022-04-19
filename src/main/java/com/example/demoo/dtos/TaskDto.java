@@ -20,6 +20,42 @@ public class TaskDto
         Account = account;
     }
 
+    public TaskDto(String title, String discription, Boolean completed, LocalDate createdat, AccountDto account) {
+        Title = title;
+        Discription = discription;
+        Completed = completed;
+        Createdat = createdat;
+        Account = account;
+    }
+
+    public TaskDto(){
+
+    }
+
+    public void setTaskid(int taskid) {
+        this.taskid = taskid;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setDiscription(String discription) {
+        Discription = discription;
+    }
+
+    public void setCompleted(Boolean completed) {
+        Completed = completed;
+    }
+
+    public void setCreatedat(LocalDate createdat) {
+        Createdat = createdat;
+    }
+
+    public void setAccount(AccountDto account) {
+        Account = account;
+    }
+
     public int getTaskid() {
         return taskid;
     }
