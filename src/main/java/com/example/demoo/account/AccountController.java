@@ -27,9 +27,17 @@ public class AccountController
     }
 
     @GetMapping(value = "/employees")
-    public List<Account> GetEmployeeAccounts()
-    {
-        return AccountService.GetEmployeeAccounts();
+    public List<Account> GetEmployeeAccounts() throws Exception {
+        List<Account> retrievedAccounts = null;
+        try
+        {
+           retrievedAccounts = AccountService.GetEmployeeAccounts();
+        }
+        catch(Exception ex)
+        {
+            throw new Exception((ex.getMessage()));
+        }
+        return retrievedAccounts;
     }
 
     @PostMapping(value = "/create")

@@ -27,9 +27,18 @@ public class AccountService
         return repo.findAll();
     }
 
-    public List<Account> GetEmployeeAccounts()
-    {
-        return this.repo.selectAllEmployees();
+    public List<Account> GetEmployeeAccounts() throws Exception {
+
+        List<Account> retrievedAccounts = null;
+        try
+        {
+            retrievedAccounts = this.repo.selectAllEmployees();
+        }
+        catch (Exception ex)
+        {
+            throw  new Exception("Could not select employees");
+        }
+        return retrievedAccounts;
     }
     public void AddAccount(AccountDto newAccount)
     {
