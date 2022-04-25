@@ -1,6 +1,7 @@
 package com.example.demoo.task;
 
 import com.example.demoo.account.Account;
+import com.example.demoo.dtos.AccountDto;
 import com.example.demoo.dtos.TaskDto;
 import com.example.demoo.repositories.ITaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,15 +23,33 @@ public class TaskService
         this.repo = repo;
     }
 
-    public List<Task> GetTasks()
+    public List<TaskDto> GetTasks()
     {
-        return repo.findAll();
+        List<TaskDto> dtos = new ArrayList<TaskDto>();
+        for (Task task : repo.findAll())
+        {
+            AccountDto newAccountDto = new AccountDto();
+            newAccountDto.setAccountid(task.getAccount().getAccountid());
+            newAccountDto.setEmail(task.getAccount().getEmail());
+            TaskDto newDto = new TaskDto(task.getTaskid(), task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), newAccountDto);
+            dtos.add(newDto);
+        }
+        return dtos;
     }
 
-    public List<Task> GetTasksFromAccount(Account account)
+    public List<TaskDto> GetTasksFromAccount(AccountDto account)
     {
         System.out.println("harja");
-        return this.repo.findTasksByAccountId(account.getAccountid());
+        List<TaskDto> dtos = new ArrayList<TaskDto>();
+        AccountDto newAccountDto = new AccountDto();
+        newAccountDto.setAccountid(account.getAccountid());
+        newAccountDto.setEmail(account.getEmail());
+        for (Task task : this.repo.findTasksByAccountId(account.getAccountid()))
+        {
+            TaskDto newDto = new TaskDto(task.getTaskid(), task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), newAccountDto);
+            dtos.add(newDto);
+        }
+        return dtos;
     }
 
     public void AddTask(Task newTask)

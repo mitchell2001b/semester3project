@@ -1,6 +1,5 @@
 package com.example.demoo.task;
 
-import com.example.demoo.account.Account;
 import com.example.demoo.dtos.AccountDto;
 import com.example.demoo.dtos.TaskDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +23,16 @@ public class TaskController
 
 
     @GetMapping
-    public List<Task> GetAllTasks()
+    public List<TaskDto> GetAllTasks()
     {
         System.out.println("Howdy3");
         return TaskService.GetTasks();
     }
 
-    @GetMapping(value = "/tasksfromaccount")
-    public List<Task> GetAllTasksFromAccount(@RequestBody Account account)
+    @PostMapping(value = "/MyTasks")
+    public List<TaskDto> GetAllTasksFromAccount(@RequestBody AccountDto account)
     {
+        System.out.println(account);
         System.out.println("Howdy3");
         return TaskService.GetTasksFromAccount(account);
     }

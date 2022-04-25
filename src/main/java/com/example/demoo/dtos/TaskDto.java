@@ -6,7 +6,7 @@ public class TaskDto
 {
     private int taskid;
     private String Title;
-    private String Discription;
+    private String Description;
     private Boolean Completed;
     private LocalDate Createdat;
     private AccountDto Account;
@@ -14,7 +14,7 @@ public class TaskDto
     public TaskDto(int taskid, String title, String discription, Boolean completed, LocalDate createdat, AccountDto account) {
         this.taskid = taskid;
         Title = title;
-        Discription = discription;
+        Description = discription;
         Completed = completed;
         Createdat = createdat;
         Account = account;
@@ -22,7 +22,7 @@ public class TaskDto
 
     public TaskDto(String title, String discription, Boolean completed, LocalDate createdat, AccountDto account) {
         Title = title;
-        Discription = discription;
+        Description = discription;
         Completed = completed;
         Createdat = createdat;
         Account = account;
@@ -40,8 +40,8 @@ public class TaskDto
         Title = title;
     }
 
-    public void setDiscription(String discription) {
-        Discription = discription;
+    public void setDescription(String discription) {
+        Description = discription;
     }
 
     public void setCompleted(Boolean completed) {
@@ -64,8 +64,8 @@ public class TaskDto
         return Title;
     }
 
-    public String getDiscription() {
-        return Discription;
+    public String getDescription() {
+        return Description;
     }
 
     public Boolean getCompleted() {
@@ -85,7 +85,7 @@ public class TaskDto
         return "TaskDto{" +
                 "taskid=" + taskid +
                 ", Title='" + Title + '\'' +
-                ", Discription='" + Discription + '\'' +
+                ", Discription='" + Description + '\'' +
                 ", Completed=" + Completed +
                 ", Createdat=" + Createdat +
                 ", Account=" + Account +
