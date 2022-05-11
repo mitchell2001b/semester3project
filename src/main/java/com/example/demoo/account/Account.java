@@ -53,6 +53,14 @@ public class Account
         Email = email;
     }
 
+    public Account(String name, String password, LocalDate dateofbirth, int role, String email) {
+        Name = name;
+        Password = password;
+        Dateofbirth = dateofbirth;
+        this.role = role;
+        Email = email;
+    }
+
     public Account(int accountid) {
         this.accountid = accountid;
     }

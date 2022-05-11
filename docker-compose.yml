@@ -1,0 +1,61 @@
+version: '3.4'
+
+services:
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "javadatabase3"
+      MYSQL_ROOT_PASSWORD: "admintest123"
+      MYSQL_PASSWORD: "admintest123"
+      MYSQL_USER: "root"
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 20
+  backend:
+    image: backendimg
+    depends_on:
+      - db
+    links:
+      - db
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./backend:/home/app
+    container_name: backend
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    networks:
+      - app-network
+  frontend:
+      image: frontendimg
+      depends_on:
+        - backend
+      build:
+        context: ../../semester3react/reactdemo3
+        dockerfile: ../../semester3react/reactdemo3/Dockerfile
+      volumes:
+        - ./frontend:/home/node/app
+      container_name: frontend
+      expose:
+        - '8181'
+      ports:
+        - '8181:8181'
+      networks:
+        - app-network
+networks:
+  app-network:
+    driver: bridge
+

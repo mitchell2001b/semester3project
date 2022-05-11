@@ -52,13 +52,14 @@ public class TaskService
         return dtos;
     }
 
-    public void AddTask(Task newTask)
+    public void AddTask(TaskDto newTask)
     {
         newTask.setCompleted(false);
         newTask.setCreatedat(LocalDate.now());
         System.out.println(newTask);
+        Task taskToAdd = new Task(newTask.getTitle(), newTask.getDescription(), newTask.getCompleted(), newTask.getCreatedat(), new Account(newTask.getAccount().getAccountid(), null, null, null, 0, null, null));
 
-        this.repo.save(newTask);
+        this.repo.save(taskToAdd);
     }
 
     public Optional<Task> SelectTaskById(int id)

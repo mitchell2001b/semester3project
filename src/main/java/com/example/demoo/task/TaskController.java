@@ -3,12 +3,14 @@ package com.example.demoo.task;
 import com.example.demoo.dtos.AccountDto;
 import com.example.demoo.dtos.TaskDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5000"})
 @RestController
 @RequestMapping(path = "api/v1/task")
 public class TaskController
@@ -38,11 +40,13 @@ public class TaskController
     }
 
     @PostMapping(value = "/create")
-    public void CreateTask(@RequestBody Task newTask)
+    public ResponseEntity<String> CreateTask(@RequestBody TaskDto newTask)
     {
         System.out.println(newTask);
-
         TaskService.AddTask(newTask);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ newTask.getTaskid() + " }");
     }
 
     @GetMapping("/{Id}")
