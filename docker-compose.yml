@@ -6,10 +6,10 @@ services:
       - taskmanager-network
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD="admintest123"
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=javadatabase3
     ports:
-      - '3306:3306'
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - my-db:/var/lib/mysql
 
@@ -17,12 +17,12 @@ services:
     image: ghcr.io/mitchell2001b/reactdemo3:master
     restart: always
     ports:
-      - '8181:8181'
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
 
   backend:
     image: ghcr.io/mitchell2001b/semester3project:master
     ports:
-      - '8080:8080'
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     networks:
       - taskmanager-network
     depends_on:
@@ -31,8 +31,8 @@ services:
     environment:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://javadatabase3/javadatabase3",
-        "spring.datasource.username" : "root",
-        "spring.datasource.password" : "admintest123",
+        "spring.datasource.username" : "$MYSQLDB_USER",
+        "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
         }'
