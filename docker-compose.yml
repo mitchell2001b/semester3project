@@ -21,6 +21,8 @@ services:
       dockerfile: ../../semester3react/reactdemo3/Dockerfile
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    expose:
+      - 8081
 
   backend:
     image: ghcr.io/mitchell2001b/semester3project:master
