@@ -16,6 +16,9 @@ services:
   frontend:
     image: ghcr.io/mitchell2001b/reactdemo3:master
     restart: always
+    build:
+      context: ../../semester3react/reactdemo3
+      dockerfile: ../../semester3react/reactdemo3/Dockerfile
     ports:
       - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
 
