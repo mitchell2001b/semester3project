@@ -25,6 +25,5 @@ public class AccountDal
     public void AddAccountToDatabase(Account newAccount)
     {
         this.repo.save(newAccount);
-        //aa
     }
 }
