@@ -22,7 +22,7 @@
 #      timeout: 5s
 #      retries: 20
 #  backend:
-#    image:
+#    image: ghcr.io/mitchell2001b/semester3project:master
 #      ports:
 #        - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
 #      networks:
