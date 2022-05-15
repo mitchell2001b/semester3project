@@ -78,7 +78,7 @@ class TaskControllerTest {
 
        Integer expected3 = JsonPath.read(result.getResponse().getContentAsString(),"$.id");
 
-        assertThat(expected3).isEqualTo(4);
+        assertThat(expected3).isEqualTo(3);
     }
 
 
