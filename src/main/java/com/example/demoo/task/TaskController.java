@@ -43,10 +43,10 @@ public class TaskController
     public ResponseEntity<String> CreateTask(@RequestBody TaskDto newTask)
     {
         System.out.println(newTask);
-        TaskService.AddTask(newTask);
+       Task newCreatedTask = TaskService.AddTask(newTask);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body("{ \"id\": "+ newTask.getTaskid() + " }");
+                .body("{ \"id\": "+ newCreatedTask.getTaskid() + " }");
     }
 
     @GetMapping("/{Id}")

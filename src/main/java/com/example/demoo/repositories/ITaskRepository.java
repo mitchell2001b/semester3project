@@ -10,4 +10,7 @@ public interface ITaskRepository  extends JpaRepository<Task, Integer>
 {
     @Query(value = "SELECT * FROM task where accountid = ?1", nativeQuery = true)
     public List<Task> findTasksByAccountId(int id);
+
+    @Query(value = "SELECT * FROM `task` ORDER BY `taskid` DESC LIMIT 1", nativeQuery = true)
+    public Task findLastCreatedTask();
 }

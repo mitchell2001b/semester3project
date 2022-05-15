@@ -43,4 +43,27 @@ class ITaskRepositoryTest {
 
     }
 
+    @Test
+    void CheckIflastCreatedTaskIsReturned()
+    {
+        //arrange
+        Account account1 = new Account("name1", "accountpassword1", LocalDate.from(LocalDateTime.now()), 0, "email1");
+        underTestAccountRepo.save(account1);
+        List<Account> savedTestAccounts = underTestAccountRepo.findAll();
+
+        Task task1 = new Task("title1", "description1", false, LocalDate.from(LocalDateTime.now()), savedTestAccounts.get(0));
+        Task task2 = new Task("title2", "description2", false, LocalDate.from(LocalDateTime.now()), savedTestAccounts.get(0));
+
+        underTestTaskRepo.save(task1);
+        underTestTaskRepo.save(task2);
+
+        //act
+        Task expected = underTestTaskRepo.findLastCreatedTask();
+
+        //assert
+        assertThat(expected.getDescription()).isEqualTo("description2");
+        assertThat(expected.getTitle()).isEqualTo("title2");
+        assertThat(expected).isEqualTo(task2);
+    }
+
 }
