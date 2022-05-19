@@ -58,7 +58,7 @@ class TaskControllerTest {
 
     @Test
     @Sql("/AddTestData.sql")
-    void shouldCreateTask() throws Exception {
+    void shouldCreateTaskWithId3() throws Exception {
 
         AccountDto dto = new AccountDto(1, "testaccount2", "test2", LocalDate.ofEpochDay(2022-05-28), "testaccount2@gmail.com");
         TaskDto taskToCreate = new TaskDto("TestTask1", "testdiscription1", false, LocalDate.ofEpochDay(2022-05-28), dto);
@@ -73,13 +73,52 @@ class TaskControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-
-
-
-       Integer expected3 = JsonPath.read(result.getResponse().getContentAsString(),"$.id");
+        Integer expected3 = JsonPath.read(result.getResponse().getContentAsString(),"$.id");
 
         assertThat(expected3).isEqualTo(3);
     }
 
+    @Test
+    @Sql("/AddTestData.sql")
+    public void shouldDeleteTask() throws Exception {
 
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/task/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].taskid").doesNotExist())
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/task")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].taskid").value(2))
+                .andReturn();
+    }
+
+
+    @Test
+    @Sql("/AddTestData.sql")
+    void shouldUpdateTask() throws Exception {
+
+        AccountDto dto = new AccountDto(1, "testaccount2", "test2", LocalDate.ofEpochDay(2022-05-28), "testaccount2@gmail.com");
+        TaskDto taskToUpdate = new TaskDto(2,"TestTask1updated", "testdiscription1", false, LocalDate.ofEpochDay(2022-05-28), dto);
+        // 2022-05-28
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
+                mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/task/2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskToUpdate))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/task")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[1].title").value("TestTask1updated"))
+                .andReturn();
+
+    }
 }

@@ -83,11 +83,11 @@ public class TaskService
         {
             task.setCompleted(dto.getCompleted());
         }
-        if(dto.getTitle() != null && !Objects.equals(dto.getTitle(), task.getTitle()))
+        if(dto.getTitle() != null && !Objects.equals(dto.getTitle(), task.getTitle()) && dto.getTitle().length() > 0)
         {
             task.setTitle(dto.getTitle());
         }
-        if(dto.getDescription() != null && !Objects.equals(dto.getDescription(), task.getDescription()))
+        if(dto.getDescription() != null && !Objects.equals(dto.getDescription(), task.getDescription()) && dto.getDescription().length() > 0)
         {
             task.setDescription(dto.getDescription());
         }
