@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -78,9 +79,17 @@ public class TaskService
         System.out.println(dto.getTaskid() + "jjjjj");
         Task task = this.repo.findById(dto.getTaskid()).orElseThrow(() -> new IllegalStateException("product with id: " + dto.getTaskid() + " not found!"));
 
-        if(dto.getCompleted() != null && dto.getCompleted() != task.getCompleted())
+        if(dto.getCompleted() != null && !Objects.equals(dto.getCompleted(), task.getCompleted()))
         {
             task.setCompleted(dto.getCompleted());
+        }
+        if(dto.getTitle() != null && !Objects.equals(dto.getTitle(), task.getTitle()))
+        {
+            task.setTitle(dto.getTitle());
+        }
+        if(dto.getDescription() != null && !Objects.equals(dto.getDescription(), task.getDescription()))
+        {
+            task.setDescription(dto.getDescription());
         }
 
         if(dto.getAccount() != null)
