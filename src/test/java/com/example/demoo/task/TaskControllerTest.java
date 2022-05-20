@@ -121,4 +121,18 @@ class TaskControllerTest {
                 .andReturn();
 
     }
+
+
+    @Test
+    @Sql("/AddTestData.sql")
+    void shouldSelectTaskById() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/task/2")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.taskid").value(2))
+                .andExpect(jsonPath("$.title").value("7777"))
+                .andReturn();
+
+    }
 }
