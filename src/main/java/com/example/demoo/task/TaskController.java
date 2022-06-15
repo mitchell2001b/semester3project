@@ -53,7 +53,7 @@ public class TaskController
     }
 
     @PutMapping("/{Id}")
-    public void updateTask(@PathVariable("Id") int id, @RequestBody Task task)
+    public void updateTask(@PathVariable("Id") int id, @RequestBody TaskDto task)
     {
         if(task.getAccount() != null)
         {
