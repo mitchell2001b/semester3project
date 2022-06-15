@@ -25,56 +25,51 @@ public class TaskController
 
 
     @GetMapping
-    public List<TaskDto> GetAllTasks()
+    public List<TaskDto> getAllTasks()
     {
-        System.out.println("Howdy3");
-        return TaskService.GetTasks();
+        return TaskService.getTasks();
     }
 
     @PostMapping(value = "/MyTasks")
-    public List<TaskDto> GetAllTasksFromAccount(@RequestBody AccountDto account)
+    public List<TaskDto> getAllTasksFromAccount(@RequestBody AccountDto account)
     {
-        System.out.println(account);
-        System.out.println("Howdy3");
-        return TaskService.GetTasksFromAccount(account);
+        return TaskService.getTasksFromAccount(account);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<String> CreateTask(@RequestBody TaskDto newTask)
+    public ResponseEntity<String> createTask(@RequestBody TaskDto newTask)
     {
         System.out.println(newTask);
-       Task newCreatedTask = TaskService.AddTask(newTask);
+       Task newCreatedTask = TaskService.addTask(newTask);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ newCreatedTask.getTaskid() + " }");
     }
 
     @GetMapping("/{Id}")
-    public Optional<Task> GetTaskById(@PathVariable int Id)
+    public Optional<Task> getTaskById(@PathVariable int Id)
     {
-        System.out.println(Id + "joo");
-        return TaskService.SelectTaskById(Id);
+        return TaskService.selectTaskById(Id);
     }
 
     @PutMapping("/{Id}")
-    public void UpdateTask(@PathVariable("Id") int id, @RequestBody Task task)
+    public void updateTask(@PathVariable("Id") int id, @RequestBody Task task)
     {
-        System.out.println(id + "het id is");
         if(task.getAccount() != null)
         {
-            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), new AccountDto(task.getAccount().getAccountid(), null, null, null
+            TaskService.updateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), new AccountDto(task.getAccount().getAccountid(), null, null, null
                     ,null)));
         }
         else
         {
-            TaskService.UpdateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), null));
+            TaskService.updateTask(new TaskDto(id, task.getTitle(), task.getDescription(), task.getCompleted(), task.getCreatedat(), null));
         }
 
     }
 
     @DeleteMapping("/{Id}")
-    public void DeleteTask(@PathVariable("Id") int Id) {
-        TaskService.DeleteTask(Id);
+    public void deleteTask(@PathVariable("Id") int Id) {
+        TaskService.deleteTask(Id);
     }
 
 

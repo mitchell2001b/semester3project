@@ -20,18 +20,17 @@ public class AccountController
        this.AccountService = accountService;
     }
     @GetMapping
-    public List<Account> GetAccounts()
+    public List<Account> getAccounts()
     {
-        System.out.println("Howdy3");
-        return AccountService.GetAccounts();
+        return AccountService.getAccounts();
     }
 
     @GetMapping(value = "/employees")
-    public List<Account> GetEmployeeAccounts() throws Exception {
+    public List<Account> getEmployeeAccounts() throws Exception {
         List<Account> retrievedAccounts = null;
         try
         {
-           retrievedAccounts = AccountService.GetEmployeeAccounts();
+           retrievedAccounts = AccountService.getEmployeeAccounts();
         }
         catch(Exception ex)
         {
@@ -41,28 +40,25 @@ public class AccountController
     }
 
     @PostMapping(value = "/create")
-    public void CreateAccount(@RequestBody AccountDto newAccount)
+    public void createAccount(@RequestBody AccountDto newAccount)
     {
-        System.out.println(newAccount);
-        System.out.println(newAccount.getEmail());
-        AccountService.AddAccount(newAccount);
+        AccountService.addAccount(newAccount);
     }
 
     @GetMapping("/{Id}")
-    public Optional<Account> GetAccountById(@PathVariable int Id)
+    public Optional<Account> getAccountById(@PathVariable int Id)
     {
-        System.out.println(Id + "joo");
-        return AccountService.SelectAccountById(Id);
+        return AccountService.selectAccountById(Id);
     }
 
     @PutMapping("/{Id}")
     public void UpdateAccount(@PathVariable("Id") int id, @RequestBody Account account)
     {
-        AccountService.UpdateAccount(new AccountDto(id, account.getName(), account.getPassword(), account.getDateofbirth(), account.getEmail()));
+        AccountService.updateAccount(new AccountDto(id, account.getName(), account.getPassword(), account.getDateofbirth(), account.getEmail()));
     }
 
     @DeleteMapping("/{Id}")
     public void DeleteAccount(@PathVariable("Id") int Id) {
-        AccountService.DeleteAccount(Id);
+        AccountService.deleteAccount(Id);
     }
 }

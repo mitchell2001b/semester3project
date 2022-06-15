@@ -24,7 +24,7 @@ public class TaskService
         this.repo = repo;
     }
 
-    public List<TaskDto> GetTasks()
+    public List<TaskDto> getTasks()
     {
         List<TaskDto> dtos = new ArrayList<TaskDto>();
         for (Task task : repo.findAll())
@@ -38,9 +38,8 @@ public class TaskService
         return dtos;
     }
 
-    public List<TaskDto> GetTasksFromAccount(AccountDto account)
+    public List<TaskDto> getTasksFromAccount(AccountDto account)
     {
-        System.out.println("harja");
         List<TaskDto> dtos = new ArrayList<TaskDto>();
         AccountDto newAccountDto = new AccountDto();
         newAccountDto.setAccountid(account.getAccountid());
@@ -53,11 +52,11 @@ public class TaskService
         return dtos;
     }
 
-    public Task AddTask(TaskDto newTask)
+    public Task addTask(TaskDto newTask)
     {
         newTask.setCompleted(false);
         newTask.setCreatedat(LocalDate.now());
-        System.out.println(newTask);
+
         Task taskToAdd = new Task(newTask.getTitle(), newTask.getDescription(), newTask.getCompleted(), newTask.getCreatedat(), new Account(newTask.getAccount().getAccountid(), null, null, null, 0, null, null));
 
         this.repo.save(taskToAdd);
@@ -65,18 +64,14 @@ public class TaskService
         return this.repo.findLastCreatedTask();
     }
 
-    public Optional<Task> SelectTaskById(int id)
+    public Optional<Task> selectTaskById(int id)
     {
-        System.out.println(id + "ppppxxxxxl");
-        System.out.println(this.repo.existsById(id));
-
         return this.repo.findById(id);
     }
 
     @Transactional
-    public void UpdateTask(TaskDto dto)
+    public void updateTask(TaskDto dto)
     {
-        System.out.println(dto.getTaskid() + "jjjjj");
         Task task = this.repo.findById(dto.getTaskid()).orElseThrow(() -> new IllegalStateException("product with id: " + dto.getTaskid() + " not found!"));
 
         if(dto.getCompleted() != null && !Objects.equals(dto.getCompleted(), task.getCompleted()))
@@ -101,7 +96,7 @@ public class TaskService
         }
     }
 
-    public void DeleteTask(int id)
+    public void deleteTask(int id)
     {
         Optional<Task> taskToDelete = repo.findById(id);
         if(repo.existsById(id))

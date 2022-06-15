@@ -22,12 +22,12 @@ public class AccountService
         this.repo = repo;
     }
 
-    public List<Account> GetAccounts()
+    public List<Account> getAccounts()
     {
         return repo.findAll();
     }
 
-    public List<Account> GetEmployeeAccounts() throws Exception {
+    public List<Account> getEmployeeAccounts() throws Exception {
 
         List<Account> retrievedAccounts = null;
         try
@@ -40,20 +40,18 @@ public class AccountService
         }
         return retrievedAccounts;
     }
-    public void AddAccount(AccountDto newAccount)
+    public void addAccount(AccountDto newAccount)
     {
         Account accountToAdd = new Account(newAccount.getName(), newAccount.getPassword(), newAccount.getDateofbirth(), 1, newAccount.getEmail(), null);
         this.repo.save(accountToAdd);
     }
 
-    public Optional<Account> SelectAccountById(int id)
+    public Optional<Account> selectAccountById(int id)
     {
-        System.out.println(id + "ppppl");
-        System.out.println(this.repo.existsById(id));
         return this.repo.findById(id);
     }
 
-    public void DeleteAccount(int id)
+    public void deleteAccount(int id)
     {
         Optional<Account> accountToDelete = repo.findById(id);
         if(repo.existsById(id))
@@ -63,7 +61,7 @@ public class AccountService
     }
 
     @Transactional
-    public void UpdateAccount(AccountDto dto)
+    public void updateAccount(AccountDto dto)
     {
         Account account = this.repo.findById(dto.getAccountid()).orElseThrow(() -> new IllegalStateException("product with id: " + dto.getAccountid() + " not found!"));
 
